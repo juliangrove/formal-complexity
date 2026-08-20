@@ -1,0 +1,38 @@
+project:
+  type: website
+  output-dir: ../docs/notes
+  render:
+    - "about.qmd"
+    - "index.qmd"
+
+website:
+  title: "Introduction to semantics"
+  page-navigation: true
+  sidebar:
+    style: docked
+    search: true
+    contents:
+    - about.qmd
+    - index.qmd
+    - section: "Convention"
+    - section: "Speech acts"
+    - section: "Speaker meaning"
+    - section: "Diagnosing inference"
+    - section: "Formal preliminaries"
+    - section: "Models"
+    - section: "Applicative categorial grammar"
+    - section: "Verbs"
+    - section: "Coordinators"
+    - section: "Adjectives"
+    - section: "Quantification"
+
+format:
+  html:
+    theme: [lux,tufte]
+    highlight-style: gruvbox-dark
+    css: styles.css
+    toc: true
+    code-tools: true
+
+# filters:
+  # - line-highlight
