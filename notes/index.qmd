@@ -139,8 +139,8 @@ Available here:
 | Fri., Sept. 4  | Regular languages, expressions, and grammars      |         |            |
 | Mon., Sept. 7  | No class: Labor Day                               |         | View       |
 | Wed., Sept. 9  | Regular languages, expressions, and grammars      |         |            |
-| Fri., Sept. 11 | finite-state automata                             |         |            |
-| Mon., Sept. 14 | finite-state automata                             |         |            |
+| Fri., Sept. 11 | Finite-state automata                             |         |            |
+| Mon., Sept. 14 | Finite-state automata                             |         |            |
 | Wed., Sept. 16 | The pumping lemma for regular languages           |         |            |
 | Fri., Sept. 18 | No class: Julian away                             |         |            |
 | Mon., Sept. 21 | The pumping lemma for regular languages           |         | View       |
