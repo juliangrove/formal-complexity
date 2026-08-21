@@ -1,6 +1,6 @@
 ---
-title: "Introduction to Semantics"
-bibliography: semantics.bib
+title: "Formal complexity"
+bibliography: formal-complexity.bib
 ---
 
 ## Outline
