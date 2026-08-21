@@ -2,7 +2,7 @@
 title: "About"
 ---
 
-This site contains materials the course *Introduction to Semantics* given by [Julian Grove](http://juliangrove.github.io/) at the [University of Florida](https://lin.ufl.edu/) during the Fall 2026 semester.
+This site contains materials the course *Formal Complexity* given by [Julian Grove](http://juliangrove.github.io/) at the [University of Florida](https://lin.ufl.edu/) during the Fall 2026 semester.
 
 ## About the instructor
 
@@ -13,9 +13,9 @@ You can find out more about his research interests by checking out his [papers](
 ## About the site
 
 The site itself is built using [Quarto](https://quarto.org/).
-The source files for this site are available on github at [`juliangrove/intro-semantics`](https://github.com/juliangrove/intro-semantics.git).
+The source files for this site are available on github at [`juliangrove/formal-complexity`](https://github.com/juliangrove/formal-complexity.git).
 
 ## License <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
 
-<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Introduction to Semantics</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://juliangrove.github.io" property="cc:attributionName" rel="cc:attributionURL">Julian Grove</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-Based on materials at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/juliangrove/intro-semantics" rel="dct:source">https://github.com/juliangrove/intro-semantics</a>.
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Formal Complexity</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://juliangrove.github.io" property="cc:attributionName" rel="cc:attributionURL">Julian Grove</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+Based on materials at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/juliangrove/formal-complexity" rel="dct:source">https://github.com/juliangrove/formal-complexity</a>.

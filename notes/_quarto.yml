@@ -6,7 +6,7 @@ project:
     - "index.qmd"
 
 website:
-  title: "Introduction to semantics"
+  title: "Formal complexity"
   page-navigation: true
   sidebar:
     style: docked
@@ -14,17 +14,12 @@ website:
     contents:
     - about.qmd
     - index.qmd
-    - section: "Convention"
-    - section: "Speech acts"
-    - section: "Speaker meaning"
-    - section: "Diagnosing inference"
     - section: "Formal preliminaries"
-    - section: "Models"
-    - section: "Applicative categorial grammar"
-    - section: "Verbs"
-    - section: "Coordinators"
-    - section: "Adjectives"
-    - section: "Quantification"
+    - section: "Regular languages"
+    - section: "Context-free languages"
+    - section: "Context-sensitivity"
+    - section: "Mild context-sensitivity"
+    - section: "Recursive and recursively enumerable languages"
 
 format:
   html:

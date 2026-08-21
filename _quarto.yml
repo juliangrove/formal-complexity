@@ -9,16 +9,6 @@ format:
     css: notes/styles.css
     toc: true
     code-tools: true
-  revealjs:
-    theme: default
-    highlight-style: gruvbox-dark
-    slide-number: true
-    chalkboard: true
-    incremental: true
-    preview-links: auto
-    css: slides/styles.css
-    footer: "Introduction to Semantics"
 
 projects:
   - notes
-  - slides
