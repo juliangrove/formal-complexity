@@ -128,45 +128,45 @@ Available here:
 
 ## Calendar {#sec-calendar}
 
-| Date           | Topic                                             | Reading | Assignment |
-|----------------|---------------------------------------------------|---------|------------|
-| Fri., Aug. 21  | Introduction                                      |         |            |
-| Mon., Aug. 24  | Set-theoretic foundations and languages           |         | View       |
-| Wed., Aug. 26  | Set-theoretic foundations and languages           |         |            |
-| Fri., Aug. 28  | Set-theoretic foundations and languages           |         |            |
-| Mon., Aug. 31  | Finite languages and regular languages            |         |            |
-| Wed., Sept. 2  | Regular languages, expressions, and grammars      |         |            |
-| Fri., Sept. 4  | Regular languages, expressions, and grammars      |         |            |
-| Mon., Sept. 7  | No class: Labor Day                               |         | View       |
-| Wed., Sept. 9  | Regular languages, expressions, and grammars      |         |            |
-| Fri., Sept. 11 | Finite-state automata                             |         |            |
-| Mon., Sept. 14 | Finite-state automata                             |         |            |
-| Wed., Sept. 16 | The pumping lemma for regular languages           |         |            |
-| Fri., Sept. 18 | No class: Julian away                             |         |            |
-| Mon., Sept. 21 | The pumping lemma for regular languages           |         | View       |
-| Wed., Sept. 23 | Regular languages and natural language phonology  |         |            |
-| Fri., Sept. 25 | Regular languages and natural language morphology |         |            |
-| Mon., Sept. 28 | Context-free languages                            |         |            |
-| Wed., Sept. 30 | Context-free languages                            |         |            |
-| Fri., Oct. 2   | Pushdown automata                                 |         |            |
-| Mon., Oct. 5   | Pushdown automata                                 |         | View       |
-| Wed., Oct. 7   | Context-sensitive languages                       |         |            |
-| Mon., Oct. 12  | Context-sensitive languages                       |         |            |
-| Wed., Oct. 14  | Linear bounded automata                           |         |            |
-| Fri., Oct. 16  | No class: Julian away                             |         |            |
-| Mon., Oct. 19  | Linear bounded automata                           |         | View       |
-| Wed., Oct. 21  | Is natural language syntax context-free?          |         |            |
-| Fri., Oct. 23  | Is natural language syntax context-free?          |         |            |
-| Mon., Oct. 26  | Minimalist grammars                               |         |            |
-| Wed., Oct. 28  | Minimalist grammars                               |         |            |
-| Fri., Oct. 30  | Minimalist grammars                               |         |            |
-| Mon., Nov. 2   | Multiple context-free grammars                    |         | View       |
-| Wed., Nov. 4   | Multiple context-free grammars                    |         |            |
-| Fri., Nov. 6   | Multiple context-free categorial grammars         |         |            |
-| Mon., Nov. 9   | Combinatory categorial grammars                   |         |            |
-| Fri., Nov. 13  | Combinatory categorial grammars                   |         |            |
-| Mon., Nov. 16  | Combinatory categorial grammars                   |         | View       |
-| Wed., Nov. 18  | Recursive languages and Turing machines           |         |            |
-| Fri., Nov. 20  | Recursive languages and Turing machines           |         |            |
-| Mon., Nov. 30  | Recursively enumerable languages / wrap-up        |         |            |
-| Wed., Dec. 2   | Recursively enumerable languages / wrap-up        |         |            |
+| Date           | Topic                                             | Reading                                 | Assignment                                    |
+|----------------|---------------------------------------------------|-----------------------------------------|-----------------------------------------------|
+| Fri., Aug. 21  | Introduction                                      |                                         |                                               |
+| Mon., Aug. 24  | Set-theoretic foundations and languages           | @partee_mathematical_1990, Chapters 1-3 | [View](formal_preliminaries/assignment1.html) |
+| Wed., Aug. 26  | Set-theoretic foundations and languages           |                                         |                                               |
+| Fri., Aug. 28  | Set-theoretic foundations and languages           |                                         |                                               |
+| Mon., Aug. 31  | Finite languages and regular languages            |                                         |                                               |
+| Wed., Sept. 2  | Regular languages, expressions, and grammars      |                                         |                                               |
+| Fri., Sept. 4  | Regular languages, expressions, and grammars      |                                         |                                               |
+| Mon., Sept. 7  | No class: Labor Day                               |                                         | [View](regular_languages/assignment2.html)    |
+| Wed., Sept. 9  | Regular languages, expressions, and grammars      |                                         |                                               |
+| Fri., Sept. 11 | Finite-state automata                             |                                         |                                               |
+| Mon., Sept. 14 | Finite-state automata                             |                                         |                                               |
+| Wed., Sept. 16 | The pumping lemma for regular languages           |                                         |                                               |
+| Fri., Sept. 18 | No class: Julian away                             |                                         |                                               |
+| Mon., Sept. 21 | The pumping lemma for regular languages           |                                         | View                                          |
+| Wed., Sept. 23 | Regular languages and natural language phonology  |                                         |                                               |
+| Fri., Sept. 25 | Regular languages and natural language morphology |                                         |                                               |
+| Mon., Sept. 28 | Context-free languages                            |                                         |                                               |
+| Wed., Sept. 30 | Context-free languages                            |                                         |                                               |
+| Fri., Oct. 2   | Pushdown automata                                 |                                         |                                               |
+| Mon., Oct. 5   | Pushdown automata                                 |                                         | View                                          |
+| Wed., Oct. 7   | Context-sensitive languages                       |                                         |                                               |
+| Mon., Oct. 12  | Context-sensitive languages                       |                                         |                                               |
+| Wed., Oct. 14  | Linear bounded automata                           |                                         |                                               |
+| Fri., Oct. 16  | Linear bounded automata                           |                                         |                                               |
+| Mon., Oct. 19  | Linear bounded automata                           |                                         | View                                          |
+| Wed., Oct. 21  | Is natural language syntax context-free?          |                                         |                                               |
+| Fri., Oct. 23  | Is natural language syntax context-free?          |                                         |                                               |
+| Mon., Oct. 26  | Minimalist grammars                               |                                         |                                               |
+| Wed., Oct. 28  | Minimalist grammars                               |                                         |                                               |
+| Fri., Oct. 30  | Minimalist grammars                               |                                         |                                               |
+| Mon., Nov. 2   | Multiple context-free grammars                    |                                         | View                                          |
+| Wed., Nov. 4   | Multiple context-free grammars                    |                                         |                                               |
+| Fri., Nov. 6   | Multiple context-free categorial grammars         |                                         |                                               |
+| Mon., Nov. 9   | Combinatory categorial grammars                   |                                         |                                               |
+| Fri., Nov. 13  | Combinatory categorial grammars                   |                                         |                                               |
+| Mon., Nov. 16  | Combinatory categorial grammars                   |                                         | View                                          |
+| Wed., Nov. 18  | Recursive languages and Turing machines           |                                         |                                               |
+| Fri., Nov. 20  | Recursive languages and Turing machines           |                                         |                                               |
+| Mon., Nov. 30  | Recursively enumerable languages / wrap-up        |                                         |                                               |
+| Wed., Dec. 2   | Recursively enumerable languages / wrap-up        |                                         |                                               |

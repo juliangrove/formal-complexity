@@ -1,0 +1,81 @@
+---
+title: "Non-deterministic finite-state automata"
+bibliography: ../../formal_complexity.bib
+---
+
+A *non-deterministic* finite-state automaton loosens some of the restrictions imposed by a DFA;
+chiefly, by allowing the transitions between states to be characterized by a *relation*, rather than by a function.
+@partee_mathematical_1990, Definition 17.6 (p. 462), presents them as follows.
+
+As non-deterministic finite-state automaton (NFA) is a quintuple $⟨K, Σ, Δ, q_{0}, F⟩$, where:
+
+- $K$ is a finite set, the set of *states*.
+- $Σ$ is a finite set, the *alphabet*.
+- $q_{0}$ is a special element of $K$ (i.e., $q_{0} ∈ K$), called the *initial state*.
+- $F$ is a special subset of $K$ (i.e., $F ⊆ K$) whose elements are *final states*.
+- $Δ$ is a relation on $K × Σ^{*}$ and $K$ (i.e., $Δ ⊆ (K × Σ^{*}) × K$), called the *transition relation*.
+
+Instead of a function $δ$, we have a relation $Δ$ which associates pairs of states from $K$ and strings over the alphabet with new states from $K$.
+It is because $Δ$ can associate any given pair of input state and string with potentially more than one output state that we say NFAs are *non-deterministic*.
+
+Note also that this definition of NFAs allows not only words---but *strings*---to be associated with the transition from one state to the next.
+
+## Example
+
+For illustration, consider a finite language over the alphabet $\{a, b, c\}$;
+say, the language $\{ac, abc, bc\}$.
+We can characterize this language using the following NFA.
+
+```{dot}
+//| fig-width: 3
+//| fig-height: 1.4
+
+digraph NFA {
+  rankdir=LR;
+
+  graph [
+    margin=0,
+    pad=0,
+    splines=true,
+    nodesep=0.45,
+    ranksep=0.45
+  ];
+
+  node [
+    shape=circle,
+    width=0.4,
+    height=0.4,
+    fontsize=10
+  ];
+
+  edge [
+    fontsize=10,
+    arrowsize=0.25
+  ];
+
+  start [
+    shape=none,
+    label="",
+    width=0,
+    height=0,
+    margin=0
+  ];
+
+  q0 [label=<<I>q</I><SUB>0</SUB>>];
+  q1 [label=<<I>q</I><SUB>1</SUB>>, shape=doublecircle];
+
+  start:e -> q0:w;
+
+  q0 -> q1 [label=<<I>ac</I>>];
+  q0 -> q1 [label=<<I>abc</I>>];
+  q0 -> q1 [label=<<I>bc</I>>];
+}
+```
+
+- $K = \{q_{0}, q_{1}\}$
+- $Σ = \{a, b, c\}$
+- $F = \{q_{1}\}$
+- $Δ = \{⟨q_{0}, s, q_{1}⟩ ∣ s ∈ \{ac, abc, bc\}\}$
+
+More generally, given any finite language $L = \{s_{1}, ..., s_{n}\}$ over some alphabet $Σ$, we can define the NFA which accepts exactly the strings in this language by using the above construction and defining
+$$Δ = \{⟨q_{0}, s, q_{1}⟩ ∣ s ∈ L\}$$

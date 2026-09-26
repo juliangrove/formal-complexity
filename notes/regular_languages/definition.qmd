@@ -1,0 +1,37 @@
+---
+title: "Defining regular languages"
+bibliography: ../../formal_complexity.bib
+---
+
+The following definition can be found in @partee_mathematical_1990, Definition 17.10 (p. 465).
+
+Given an alphabet Σ:
+
+1. ∅ is a regular language.
+2. For any string s ∈ Σ*, {s} is a regular language.
+3. If A and B are regular languages, then so is A ∪ B.
+4. If A and B are regular languages, then so is AB.
+5. If A is a regular language, then so is A*.
+6. Nothing else is a regular language, unless it being so follows from 1-5.
+
+## Examples of regular languages
+
+For all, Σ = {a, b, c}
+
+1. Any finite language.
+
+2. Strings in L consist of any number of as.
+
+3. Strings in L consist of any number of as or bs.
+
+4. Strings in L consist of any number of as, followed by any number of bs.
+
+5. Strings in L begin with an a and end with a c.
+
+6. Strings in L have ab as a substring.
+
+7. Strings in L have exactly one a.
+
+### Exercise
+
+Show that each of the languages in 1--7 is regular, according to the definition of a regular language.

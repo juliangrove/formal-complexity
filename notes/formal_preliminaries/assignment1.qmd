@@ -1,0 +1,20 @@
+---
+title: "Assignment 1"
+bibliography: ../../formal_complexity.bib
+---
+
+Due on Wednesday, September 9th.
+
+## Part 1
+
+Read @partee_mathematical_1990, Chapter 1, and do exercises 1, 2, 4, 5, and 8, and 9.
+
+## Part 2
+
+Read @partee_mathematical_1990, Chapter 2, and do exercises 3 and 4.
+
+## Part 3
+
+Read @partee_mathematical_1990, Chapter 3, up to page 47 (§3.5),^[
+	Feel free to also read the rest of the chapter, if you like!
+] and do exercises 2 and 3.

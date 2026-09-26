@@ -1,0 +1,374 @@
+---
+title: "The equivalence between DFAs and NFAs"
+bibliography: ../../formal_complexity.bib
+---
+
+It turns out that DFAs and NFAs are equivalent, in the sense that they characterize the same set of languages---the regular languages.
+Not only that, but it is possible to convert between them:
+there is a systematic procedure for turning any random DFA into an NFA, as well as one for turning any NFA into a DFA.^[
+	The translation from NFAs to DFAs defined here is based on @white_two_2026.
+]
+
+To show this, we first provide the following alternative definition of NFAs, which is equivalent to the definition provided by @partee_mathematical_1990.
+According to this definition, $K$, $Σ$, $q_{0}$, and $F$ remain the same, but we present the transition relation slightly differently.
+Instead of a relation
+$$Δ ⊆ (K × Σ^{*}) × K$$
+we define a function 
+$$Δ : K × (Σ ∪ \{ϵ\}) → 2^{K}$$
+That is, $Δ$ is defined instead as a function that takes pairs of (1) states, and (2) either elements of the alphabet or $ϵ$, onto *sets of new states*.
+
+Note that any such function is equivalent to a relation on $K × (Σ ∪ \{ϵ\})$ and $K$:
+given such a function $Δ$, you can simply define the relation
+$$R = \{⟨q, x, q′⟩ ∣ q′ ∈ Δ(q, x)\}$$
+Note that if $Δ(q, x) = \varnothing$ for some $q ∈ K$ and $x ∈ Σ ∪ \{ϵ\}$, then $q$ and $x$ aren't related to any output state by the relation $R$.
+
+Meanwhile, if you have a relation $R ⊆ (K × (Σ ∪ \{ϵ\})) × K$, you can simply define the function
+$$Δ(q, x) = \{q′ ∈ K ∣ ⟨q, x, q′⟩ ∈ R\}$$
+Note (correspondingly) that for any $q ∈ K$ and $x ∈ Σ ∪ \{ϵ\}$, if $R$ doesn't relate $q$ and $x$ to any output state, then $Δ(q, x) = \varnothing$.
+
+## Example
+
+Consider the language discussed in [the example from earlier](nfas.html#example).
+That is, $L = \{ac, abc, bc\}$.
+Using the alternative definition, we can provide the following NFA characterizing this language.
+
+```{dot}
+//| fig-width: 4.5
+//| fig-height: 1.8
+
+digraph NFA {
+  rankdir=LR;
+
+  graph [
+    margin=0,
+    pad=0,
+    splines=true,
+    nodesep=0.5,
+    ranksep=0.55
+  ];
+
+  node [
+    shape=circle,
+    width=0.45,
+    height=0.45,
+    fontsize=10
+  ];
+
+  edge [
+    fontsize=10,
+    arrowsize=0.25
+  ];
+
+  start [
+    shape=none,
+    label="",
+    width=0,
+    height=0,
+    margin=0
+  ];
+
+  q0 [label=<<I>q</I><SUB><I>0</I></SUB>>];
+  qa [label=<<I>q</I><SUB><I>a</I></SUB>>];
+  qb [label=<<I>q</I><SUB><I>b</I></SUB>>];
+  q1 [label=<<I>q</I><SUB><I>1</I></SUB>>, shape=doublecircle];
+
+  start:e -> q0:w;
+
+  q0 -> qa [label=<<I>a</I>>];
+  q0 -> qa [label=<<I>ϵ</I>>];
+
+  q0 -> qb [label=<<I>a</I>>];
+
+  qa -> qb [label=<<I>b</I>>];
+
+  qb -> q1 [label=<<I>c</I>>];
+}
+```
+
+- $K = \{q_{0}, q_{a}, q_{b}, q_{1}\}$
+- $Σ = \{a, b, c\}$
+- $F = \{q_{1}\}$
+- $Δ(q_{0}, a) = \{q_{a}, q_{b}\}$ <br> $Δ(q_{0}, b) = Δ(q_{0}, c) = \varnothing$ <br> $Δ(q_{0}, ϵ) = \{q_{a}\}$ <br> 
+  $Δ(q_{a}, a) = Δ(q_{a}, c) = Δ(q_{a}, ϵ) = \varnothing$ <br> $Δ(q_{a}, b) = \{q_{b}\}$ <br>
+  $Δ(q_{b}, a) = Δ(q_{b}, b) = Δ(q_{b}, ϵ) = \varnothing$ <br> $Δ(q_{b}, c) = \{q_{1}\}$ <br>
+  $Δ(q_{1}, a) = Δ(q_{1}, b) = Δ(q_{1}, c) = Δ(q_{1}, ϵ) = \varnothing$
+
+## Translating DFAs into NFAs
+
+To show that any DFA yields an equivalent NFA, one need only adjust its transition function $δ$ so that it instead maps pairs of states and words of the alphabet onto *sets* of output states.
+Given a word $w$ and state $q$, which set of states should the pair $⟨q, w⟩$ be mapped to?
+Simply, the one-element set $\{δ(q, w)\}$, whatever that is.
+
+Thus given a DFA $⟨K, Σ, δ, q_{0}, F⟩$, we can define the NFA $⟨K, Σ, Δ, q_{0}, F⟩$, where $Δ(q, w) = \{δ(q, w)\}$ and $Δ(q, ϵ) = \varnothing$ (for any $q$).
+In a sense, every DFA already is an NFA;
+we are just rearranging the definition slightly.
+
+## Translating NFAs into DFAs
+
+Going the other direction is more interesting.
+To do this, there are a couple of definitions it is useful to provide.
+
+### $ϵ$-only paths
+
+First, we need the notion of a finite $ϵ$-only path.
+Given some NFA, a finite $ϵ$-only path can be viewed as a sequence of transitions (possibly of length 0) through its state diagram which only involve $ϵ$.
+In the state diagram above, for instance, there is exactly one finite $ϵ$-only path of length at least 1 (every state has a length-0 $ϵ$-only path to itself):
+the one from $q_{0}$ to $q_{a}$.
+By contrast, consider the following state diagram:
+
+```{dot}
+//| fig-width: 4.5
+//| fig-height: 1.8
+
+digraph NFA {
+  rankdir=LR;
+
+  graph [
+    margin=0,
+    pad=0,
+    splines=true,
+    nodesep=0.5,
+    ranksep=0.55
+  ];
+
+  node [
+    shape=circle,
+    width=0.45,
+    height=0.45,
+    fontsize=10
+  ];
+
+  edge [
+    fontsize=10,
+    arrowsize=0.25
+  ];
+
+  start [
+    shape=none,
+    label="",
+    width=0,
+    height=0,
+    margin=0
+  ];
+
+  q0 [label=<<I>q</I><SUB><I>0</I></SUB>>];
+  qa [label=<<I>q</I><SUB><I>a</I></SUB>>];
+  qb [label=<<I>q</I><SUB><I>b</I></SUB>>];
+  q1 [label=<<I>q</I><SUB><I>1</I></SUB>>, shape=doublecircle];
+
+  start:e -> q0:w;
+
+  q0 -> qa [label=<<I>a</I>>];
+  q0 -> qa [label=<<I>ϵ</I>>];
+
+  q0 -> qb [label=<<I>a</I>>];
+
+  qa -> qb [label=<<I>b</I>>];
+  qa -> qb [label=<<I>ϵ</I>>];
+
+  qb -> q1 [label=<<I>c</I>>];
+}
+```
+The NFA represented by this state diagram has three finite $ϵ$-only paths of length at least 1 (again, every state has a length-0 $ϵ$-only path to itself):
+one from $q_{0}$ to $q_{a}$;
+one from $q_{a}$ to $q_{b}$;
+and one from $q_{0}$ to $q_{b}$.
+The last path comes from sequencing the first two paths.
+
+More formally, given the transition function $Δ : K × (Σ ∪ \{ϵ\}) → 2^{K}$, we can define a relation $Δ_{ϵ} ⊆ K × K$:
+$$Δ_{ϵ} ≝ \{⟨q, q′⟩ ∣ q′ ∈ Δ(q, ϵ)\}$$
+That is, $Δ_{ϵ}$ relates $q$ to $q′$ just in case you can reach $q′$ from $q$ in one step by reading an $ϵ$.
+
+Let us now define the notion of *composing $Δ_{ϵ}$ with itself* an arbitrary number of times, denoted $Δ_{ϵ}^{n}$ (where $n$ is the relevant "arbitrary" number).
+$$Δ_{ϵ}^{0} ≝ \{⟨q, q⟩ ∣ q ∈ K\}$$
+$$Δ_{ϵ}^{n+1} ≝ Δ_{ϵ} ∘ Δ_{ϵ}^{n}$$
+Thus $Δ_{ϵ}^{0}$ is the identity relation on $K$;
+$Δ_{ϵ}^{1}$ is just $Δ_{ϵ}$ itself;
+$Δ_{ϵ}^{2}$ is $Δ_{ϵ} ∘ Δ_{ϵ}$ (i.e., $Δ_{ϵ}$ composed with itself);
+and so on.
+Then the following relation, $Δ_{ϵ}^{*}$, is known as the *reflexive transitive closure* of the relation $Δ_{ϵ}$:
+$$Δ_{ϵ}^{*} ≝ ⋃_{i ∈ ℕ}Δ_{ϵ}^{i}$$
+In words, $Δ_{ϵ}^{*}$ relates two states $q$ and $q′$ just in case there is a finite (possibly length-0) $ϵ$-only path from $q$ to $q′$ in the state diagram of the NFA whose transition function is $Δ$.
+Because length-0 paths are also allowed, the relation is *reflexive*;
+i.e., it relates any state in $K$ (the set of states) to itself.
+
+### ϵ-closure by finite paths
+
+For any set of states $Q ⊆ K$, we can define its *epsilon closure by finite paths* $Ε(Q)$:
+$$Ε(Q) ≝ \{q′ ∣ \text{there is some } q \text{ in } Q \text{, and } ⟨q, q′⟩ ∈ Δ_{ϵ}^{*}\}$$
+In words, given any set $Q$ of states, $Ε(Q)$ has as an element every state in $Q$ itself, as well as every state you can get to from a state in $Q$ via a finite $ϵ$-only path.
+
+Consider again the state diagram given just above, and consider the set $\{q_{0}\}$.
+Then, $Ε(\{q_{0}\}) = \{q_{0}, q_{a}, q_{b}\}$;
+this is the set of states reachable from $q_{0}$ by some finite $ϵ$-only path.
+Note that if we instead consider the set $\{q_{0}, q_{a}\}$, we get the same set again:
+$Ε(\{q_{0}, q_{a}\}) = \{q_{0}, q_{a}, q_{b}\}$.
+
+### The translation
+
+We can now straightforwardly define the translation from an arbitrary NFA to its DFA which accepts the same language.
+Given an NFA $⟨K, Σ, Δ, q_{0}, F⟩$, we define the corresponding DFA $⟨K′, Σ′, δ, q_{0}′, F′⟩$ as follows.
+
+- $K′ = 2^{K}$
+- $Σ′ = Σ$
+- $δ(Q, w) = Ε(⋃_{q ∈ Q}Δ(q, w))$ (where $w ∈ Σ$)
+- $q_{0}′ = Ε(\{q_{0}\})$
+- $F′ = \{Q ∣ Q ∩ F ≠ \varnothing\}$
+
+## Example
+
+Consider our original example of an NFA again, repeated here.
+
+```{dot}
+//| fig-width: 4.5
+//| fig-height: 1.8
+
+digraph NFA {
+  rankdir=LR;
+
+  graph [
+    margin=0,
+    pad=0,
+    splines=true,
+    nodesep=0.5,
+    ranksep=0.55
+  ];
+
+  node [
+    shape=circle,
+    width=0.45,
+    height=0.45,
+    fontsize=10
+  ];
+
+  edge [
+    fontsize=10,
+    arrowsize=0.25
+  ];
+
+  start [
+    shape=none,
+    label="",
+    width=0,
+    height=0,
+    margin=0
+  ];
+
+  q0 [label=<<I>q</I><SUB><I>0</I></SUB>>];
+  qa [label=<<I>q</I><SUB><I>a</I></SUB>>];
+  qb [label=<<I>q</I><SUB><I>b</I></SUB>>];
+  q1 [label=<<I>q</I><SUB><I>1</I></SUB>>, shape=doublecircle];
+
+  start:e -> q0:w;
+
+  q0 -> qa [label=<<I>a</I>>];
+  q0 -> qa [label=<<I>ϵ</I>>];
+
+  q0 -> qb [label=<<I>a</I>>];
+
+  qa -> qb [label=<<I>b</I>>];
+
+  qb -> q1 [label=<<I>c</I>>];
+}
+```
+
+- $K = \{q_{0}, q_{a}, q_{b}, q_{1}\}$
+- $Σ = \{a, b, c\}$
+- $F = \{q_{1}\}$
+- $Δ(q_{0}, a) = \{q_{a}, q_{b}\}$ <br> $Δ(q_{0}, b) = Δ(q_{0}, c) = \varnothing$ <br> $Δ(q_{0}, ϵ) = \{q_{a}\}$ <br> 
+  $Δ(q_{a}, a) = Δ(q_{a}, c) = Δ(q_{a}, ϵ) = \varnothing$ <br> $Δ(q_{a}, b) = \{q_{b}\}$ <br>
+  $Δ(q_{b}, a) = Δ(q_{b}, b) = Δ(q_{b}, ϵ) = \varnothing$ <br> $Δ(q_{b}, c) = \{q_{1}\}$ <br>
+  $Δ(q_{1}, a) = Δ(q_{1}, b) = Δ(q_{1}, c) = Δ(q_{1}, ϵ) = \varnothing$
+
+By using the translation procedure defined above, we obtain the following DFA.
+
+```{dot}
+//| fig-width: 6
+//| fig-height: 3
+
+digraph DFA {
+  rankdir=LR;
+
+  graph [
+    margin=0,
+    pad=0,
+    splines=true,
+    nodesep=0.55,
+    ranksep=0.7
+  ];
+
+  node [
+    shape=circle,
+    fontsize=10
+  ];
+
+  edge [
+    fontsize=10,
+    arrowsize=0.25
+  ];
+
+  start [
+    shape=none,
+    label="",
+    width=0,
+    height=0,
+    margin=0
+  ];
+
+  q0a [
+    label=<{<I>q</I><SUB><I>0</I></SUB>, <I>q</I><SUB><I>a</I></SUB>}>
+  ];
+
+  qab [
+    label=<{<I>q</I><SUB><I>a</I></SUB>, <I>q</I><SUB><I>b</I></SUB>}>
+  ];
+
+  qb [
+    label=<{<I>q</I><SUB><I>b</I></SUB>}>
+  ];
+
+  q1 [
+    label=<{<I>q</I><SUB><I>1</I></SUB>}>,
+    shape=doublecircle
+  ];
+
+  empty [
+    label="∅"
+  ];
+
+  start:e -> q0a:w;
+
+  q0a -> qab [label=<<I>a</I>>];
+  q0a -> qb  [label=<<I>b</I>>];
+  q0a -> empty [label=<<I>c</I>>];
+
+  qab -> empty [label=<<I>a</I>>];
+  qab -> qb    [label=<<I>b</I>>];
+  qab -> q1    [label=<<I>c</I>>];
+
+  qb -> empty [label=<<I>a</I>>];
+  qb -> empty [label=<<I>b</I>>];
+  qb -> q1    [label=<<I>c</I>>];
+
+  q1 -> empty [label=<<I>a</I>>];
+  q1 -> empty [label=<<I>b</I>>];
+  q1 -> empty [label=<<I>c</I>>];
+
+  empty:n -> empty:n [label=<<I>a</I>>];
+  empty:e -> empty:e [label=<<I>b</I>>];
+  empty:s -> empty:s [label=<<I>c</I>>];
+}
+```
+
+- $K′ = 2^{K} =$ <br> $\{\varnothing,$ <br>
+  $\{q_{0}\}, \{q_{a}\}, \{q_{b}\}, \{q_{1}\},$ <br>
+  $\{q_{0}, q_{a}\}, \{q_{0}, q_{b}\}, \{q_{0}, q_{1}\}, \{q_{a}, q_{b}\}, \{q_{a}, q_{1}\}, \{q_{b}, q_{1}\},$ <br>
+  $\{q_{0}, q_{a}, q_{b}\}, \{q_{0}, q_{b}, q_{1}\}, \{q_{0}, q_{a}, q_{1}\}, \{q_{a}, q_{b}, q_{1}\},$ <br>
+  $K\}$
+- $Σ′ = \{a, b, c\}$
+- $δ(Q, w) = Ε(⋃_{q ∈ Q}Δ(q, w))$
+- $q_{0}′ = Ε(\{q_{0}\}) = \{q_{0}, q_{a}\}$
+- $F′ = \{Q ∣ Q ∩ F ≠ \varnothing\} =$ <br>
+  $\{\{q_{1}\}, \{q_{0}, q_{1}\}, \{q_{a}, q_{1}\}, \{q_{b}, q_{1}\}, \{q_{0}, q_{b}, q_{1}\}, \{q_{0}, q_{a}, q_{1}\}, \{q_{a}, q_{b}, q_{1}\}, K\}$
+
+Note that the state diagram for this DFA displays only states which are *reachable* from the initial state $\{q_{0}, q_{a}\}$.

@@ -1,0 +1,207 @@
+---
+title: "Deterministic finite-state automata"
+bibliography: ../../formal_complexity.bib
+---
+
+Following @partee_mathematical_1990, Definition 17.1 (p. 458), we define *deterministic* finite-state automata as follows.
+
+As deterministic finite-state automaton (DFA) is a quintuple $⟨K, Σ, δ, q_{0}, F⟩$, where:
+
+- $K$ is a finite set, the set of *states*.
+- $Σ$ is a finite set, the *alphabet*.
+- $q_{0}$ is a special element of $K$ (i.e., $q_{0} ∈ K$), called the *initial state*.
+- $F$ is a special subset of $K$ (i.e., $F ⊆ K$) whose elements are *final states*.
+- $δ$ is a function from $K × Σ$ onto $K$ (i.e., $δ : K × Σ → K$), called the *transition function*.
+
+## Examples
+
+For example, we can describe a DFA that recognizes the language over the alphabet $Σ = \{a, b\}$ that has an odd number of $b$s (see @partee_mathematical_1990, Figure 17.2, p. 458).
+
+```{dot}
+//| fig-width: 3
+//| fig-height: 1.25
+
+digraph DFA {
+  rankdir=LR;
+  graph [
+    margin=0,
+    pad=0,
+    splines=true,
+    nodesep=0.35,
+    ranksep=0.35
+  ];
+
+  node [
+    shape=circle,
+    width=0.4,
+    height=0.4,
+    fontsize=10
+  ];
+
+  edge [
+    fontsize=10,
+    arrowsize=0.25
+  ];
+
+  start [
+    shape=none,
+    label="",
+    width=0,
+    height=0,
+    margin=0
+  ];
+
+  q0 [label=<<I>q<SUB>0</SUB></I>>];
+  q1 [label=<<I>q<SUB>1</SUB></I>>, shape=doublecircle];
+
+  start:e -> q0:w;
+
+  q0:n -> q0:n [label=<<I>a</I>>];
+  q1:n -> q1:n [label=<<I>a</I>>];
+
+  q0 -> q1 [label=<<I>b</I>>];
+  q1 -> q0 [label=<<I>b</I>>];
+}
+```
+
+This DFA, which is illustrated by the above state diagram, can be characterized precisely as follows:
+
+- $K = \{q_{0}, q_{1}\}$.
+- $Σ = \{a, b\}$.
+- $F = \{q_{1}\}$.
+- $δ(q_{0}, a) = q_{0}$ <br> $δ(q_{0}, b) = q_{1}$ <br> $δ(q_{1}, a) = q_{1}$ <br> $δ(q_{1}, b) = q_{0}$
+
+Another example of a DFA is that which characterizes the language described in 6 of [Example of regular languages](definition.html#examples-of-regular-languages):
+the language of strings over $\{a, b, c\}$ having $ab$ as a substring.
+
+```{dot}
+//| fig-width: 4
+//| fig-height: 2
+
+digraph DFA {
+  rankdir=LR;
+
+  graph [
+    margin=0,
+    pad=0,
+    splines=true,
+    nodesep=0.45,
+    ranksep=0.55
+  ];
+
+  node [
+    shape=circle,
+    width=0.4,
+    height=0.4,
+    fontsize=10
+  ];
+
+  edge [
+    fontsize=10,
+    arrowsize=0.25
+  ];
+
+  start [
+    shape=none,
+    label="",
+    width=0,
+    height=0,
+    margin=0
+  ];
+
+  q0 [label=<<I>q</I><SUB>0</SUB>>];
+  q1 [label=<<I>q</I><SUB>1</SUB>>];
+  q2 [label=<<I>q</I><SUB>2</SUB>>, shape=doublecircle];
+
+  start:e -> q0:w;
+
+  q0 -> q1 [label=<<I>a</I>>];
+  q1 -> q2 [label=<<I>b</I>>];
+  q1 -> q0 [label=<<I>c</I>>];
+
+  q0:n -> q0:n [label=<<I>b</I>>];
+  q0:s -> q0:s [label=<<I>c</I>>];
+
+  q1:n -> q1:n [label=<<I>a</I>>];
+
+  q2:n -> q2:n [label=<<I>a</I>>];
+  q2:e -> q2:e [label=<<I>b</I>>];
+  q2:s -> q2:s [label=<<I>c</I>>];
+}
+```
+
+- $K = \{q_{0}, q_{1}, q_{2}\}$
+- $Σ = \{a, b, c\}$
+- $F = \{q_{2}\}$
+- $δ(q_{0}, a) = q_{1}$ <br> $δ(q_{0}, b) = δ(q_{0}, c) = q_{0}$ <br> $δ(q_{1}, a) = q_{1}$ <br> $δ(q_{1}, b) = q_{2}$ <br> $δ(q_{1}, c) = q_{0}$ <br> $δ(q_{2}, a) = δ(q_{2}, b) = δ(q_{2}, c) = q_{2}$
+
+Let's do one more:
+the language over $\{a, b, c\}$ whose strings have exactly one $a$.
+
+```{dot}
+//| fig-width: 4
+//| fig-height: 2
+
+digraph DFA {
+  rankdir=LR;
+
+  graph [
+    margin=0,
+    pad=0,
+    splines=true,
+    nodesep=0.45,
+    ranksep=0.55
+  ];
+
+  node [
+    shape=circle,
+    width=0.4,
+    height=0.4,
+    fontsize=10
+  ];
+
+  edge [
+    fontsize=10,
+    arrowsize=0.25
+  ];
+
+  start [
+    shape=none,
+    label="",
+    width=0,
+    height=0,
+    margin=0
+  ];
+
+  q0 [label=<<I>q</I><SUB>0</SUB>>];
+  q1 [label=<<I>q</I><SUB>1</SUB>>, shape=doublecircle];
+
+  qtrash [
+    label=<<I>q</I><SUB>trash</SUB>>
+  ];
+
+  start:e -> q0:w;
+
+  q0 -> q1 [label=<<I>a</I>>];
+  q1 -> qtrash [label=<<I>a</I>>];
+
+  q0:n -> q0:n [label=<<I>b</I>>];
+  q0:s -> q0:s [label=<<I>c</I>>];
+
+  q1:n -> q1:n [label=<<I>b</I>>];
+  q1:s -> q1:s [label=<<I>c</I>>];
+
+  qtrash:n -> qtrash:n [label=<<I>a</I>>];
+  qtrash:e -> qtrash:e [label=<<I>b</I>>];
+  qtrash:s -> qtrash:s [label=<<I>c</I>>];
+}
+```
+
+- $K = \{q_{0}, q_{1}, q_{\text{trash}}\}$
+- $Σ = \{a, b, c\}$
+- $F = \{q_{1}\}$
+- $δ(q_{0}, a) = q_{1}$ <br> $δ(q_{0}, b) = δ(q_{0}, c) = q_{0}$ <br> $δ(q_{1}, a) = q_{\text{trash}}$ <br> $δ(q_{1}, b) = δ(q_{1}, c) = q_{1}$
+
+Note that this DFA features a *sink* state (or *trap* state)---$q_{\text{trash}}$---which is there just to guarantee that we can go somewhere to if we read off a word while we're in a state where that word is not allowed to occur next.
+Thus after reading one $a$, no further $a$s are permitted;
+any strings with more $a$s are thrown in the $q_{\text{trash}}$.

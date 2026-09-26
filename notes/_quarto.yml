@@ -2,8 +2,10 @@ project:
   type: website
   output-dir: ../docs/notes
   render:
-    - "about.qmd"
-    - "index.qmd"
+    - about.qmd
+    - index.qmd
+    - formal_preliminaries/*
+    - regular_languages/*
 
 website:
   title: "Formal complexity"
@@ -15,7 +17,21 @@ website:
     - about.qmd
     - index.qmd
     - section: "Formal preliminaries"
+      contents:
+        - formal_preliminaries/sets.qmd
+        - formal_preliminaries/products.qmd
+        - formal_preliminaries/relations.qmd
+        - formal_preliminaries/functions.qmd
+        - formal_preliminaries/languages.qmd
+        - formal_preliminaries/examples.qmd
+        - formal_preliminaries/assignment1.qmd
     - section: "Regular languages"
+      contents:
+        - regular_languages/definition.qmd
+        - regular_languages/assignment2.qmd
+        - regular_languages/dfas.qmd
+        - regular_languages/nfas.qmd
+        - regular_languages/equivalence.qmd
     - section: "Context-free languages"
     - section: "Context-sensitivity"
     - section: "Mild context-sensitivity"
