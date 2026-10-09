@@ -1,0 +1,98 @@
+---
+title: "The pumping lemma for regular languages"
+bibliography: ../../formal_complexity.bib
+---
+
+The pumping lemma for regular languages is stated as follows.^[
+	These notes are largely based on @white_pumping_2026.
+	See also @rabin_finite_1959.
+]
+
+(@ex-pumping-lemma) If $L ⊆ Σ^{*}$ is a regular language, then there is a *pumping length* $p$ (which must be a positive integer: $p ≥ 1$), such that for any $s ∈ L$, if $|s| ≥ p$, then $s$ can be written
+	$$s = x · y · z$$
+	for strings $x, y, z ∈ Σ^{*}$ of which the following properties all hold:
+
+	- $|y| > 0$ (i.e., $y ≠ ϵ$)
+	- $|x · y| ≤ p$
+	- $x · y^{n} · z ∈ L$ for every $n ≥ 0$
+
+Here, $|s|$ is the *length* of $s$.
+Thus the pumping lemma says that once the length of a string $s$ in the regular language $L$ reaches $L$'s pumping length $p$, $s$ must have a substring (of length at most $p$ but greater than $0$ and contained entirely within the first $p$ symbols of $s$) which can be *pumped*:
+this substring can be either deleted or copied any number of times, and the resulting string will still be in $L$.
+In the statement of the lemma above, this substring is represented by $y$.
+
+Why is the pumping lemma true?
+Well, note that every regular language is accepted by some DFA which (by definition) has a finite number of states.
+Thus if a regular language has an infinite number of strings---and its strings are, therefore, unbounded in length---the DFA for that language must accept any string in the language past a certain length by visiting one of its states more than once.
+For a given string $s$, call the state in this DFA that has to be visited more than once (in order to accept $s$) $q_{y}$.
+Then there is a cycle in the DFA from $q_{y}$ back to itself which is responsible for parsing a substring of $s$---call this substring $y$.
+Note that we *could have* (so to speak) continued from $q_{y}$ to a final state instead of cycling:
+doing so would correspond to deleting $y$.
+Alternatively, we could have (so to speak) cycled through the DFA from $q_{y}$ back to $q_{y}$ $n$ times:
+doing so would correspond to having $n$ copies of $y$ (where our original string $s$ had only one copy).
+In other words, we are able to *pump* $y$.
+
+Why is the pumping lemma useful?
+Well, it lets us prove that some languages are not regular.
+Proofs of this kind that use the lemma generally go as follows.
+First, we assume that the language of interest *is* regular, and thus, that the pumping lemma is true of it.
+Then, we show that the pumping lemma being true of this language results in some kind of contradiction, or impossible situation.
+As a result, our assumption that the language is regular must have been wrong (oops):
+the language is not regular, after all.
+
+Given some language that we want to show is not regular, how do we show that assuming the pumping lemma results in a contradiction?
+One strategy is to assume an arbitrary pumping length $p$ and construct a string in terms of $p$ (which must be of length at least $p$) that we know *must* be in the language.
+Call this string $s$:
+then because of how $s$ is constructed, we know that the pumping lemma applies to $s$, and that there is therefore some or other substring of $s$ which can be pumped.
+Finally, we show that pumping this substring (whatever it may be) results in a string which cannot be in the original language, just by how the language is defined.
+
+Let's look at an example.
+
+## An example
+
+Let's define the following language, $L_{anbn}$:
+$$L_{anbn} = \{a^{n}b^{n} ∣ n ≥ 0\}$$
+$L_{anbn}$ has as elements strings such as $ϵ$, $ab$, $aabb$, $aaabbb$, etc.
+It does not have as elements strings such as $a$, $b$, $abb$, $aab$, $aaabb$, etc. (or strings in which the $a$s don't come before the $b$s).
+To be in $L_{anbn}$, your number of $a$s has to be the same as your number of $b$s, and your $a$s must come before your $b$s.
+
+$L_{anbn}$ is not regular.
+There is no DFA or NFA that can be constructed to accept it, and it cannot be defined using a regular expression.
+But don't take my word for it.
+Let's show that it isn't regular by using the pumping lemma:
+let's assume that $L_{anbn}$ is regular and watch the train wreck that ensues.
+
+If $L_{anbn}$ were regular, then there would be a pumping length $p$, such that for any $s ∈ L_{anbn}$ where $|s| ≥ p$, $s = x · y · z$ for some $x$, $y$, and $z$ where $|x · y| ≤ p$ and $y ≠ ϵ$, and such that $x · y^{n} · z ∈ L_{anbn}$ (for any $n ≥ 0$).
+Let's assume we have the pumping length $p$.
+Now consider the string:
+$$a^{p}b^{p}$$
+This string is in $L_{anbn}$, by definition (since we have $a^{n}b^{n} ∈ L_{anbn}$ for every $n ≥ 0$, and $p$ is some $n$).
+The length of this string is greater than $p$ (in fact, it's $2p$);
+hence, the pumping lemma applies.
+Therefore, there are substrings $x$, $y$, and $z$, such that:
+
+- $|x · y| ≤ p$
+- $y ≠ ϵ$
+- $a^{p}b^{p} = x · y · z$
+- $x · y^{n} · z ∈ L_{anbn}$ for every $n ≥ 0$
+
+Because $|x · y| ≤ p$, both $x$ and $y$ can only consist of $a$'s.
+And because $y$ cannot be the empty string, it must be some non-empty sequence of $a$'s:
+it is either $a$, or $aa$, $aaa$, or, ..., or $a^{p}$.
+That is, $y = a^{k}$ for some $k$ where $1 ≤ k ≤ p$.
+As a result, $a^{p}b^{p}$ can instead be written:
+$$a^{p - k - r} · a^{k} · a^{r} · b^{p}$$
+where $0 ≤ r ≤ p - k$.
+In other words, $a^{k}$ is some substring of $a^{p}$, possibly sandwiched between some $a$'s on its left and/or some $a$'s (followed by $b$'s) on its right.
+Thus we have $x = a^{p - k - r}$, $y = a^{k}$, and $z = a^{r}b^{p}$.
+
+Further, $y$ can be *pumped*:
+for any $n ≥ 0$, $a^{p - k - r} · a^{nk} · a^{r} · b^{p} ∈ L_{anbn}$.
+For example, take $n = 0$;
+that is, let's just delete $a^{k}$.
+We can therefore conclude that $a^{p - k} · b^{p} ∈ L_{anbn}$.
+Since $k ≥ 1$, $p - k < p$, and the number of $a$'s in $a^{p - k} · b^{p}$ doesn't match the number of $b$'s.
+So, $a^{p - k} · b^{p}$ actually can't be in $L_{anbn}$.
+But we just said that it has to be!
+We have a contradiction.
+$L_{anbn}$ can't be regular after all.

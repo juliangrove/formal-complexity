@@ -143,14 +143,14 @@ Available here:
 | Mon., Sept. 14 | Finite-state automata                             |                                         |                                               |
 | Wed., Sept. 16 | The pumping lemma for regular languages           |                                         |                                               |
 | Fri., Sept. 18 | No class: Julian away                             |                                         |                                               |
-| Mon., Sept. 21 | The pumping lemma for regular languages           |                                         | View                                          |
+| Mon., Sept. 21 | The pumping lemma for regular languages           |                                         |                                               |
 | Wed., Sept. 23 | Regular languages and natural language phonology  |                                         |                                               |
-| Fri., Sept. 25 | Regular languages and natural language morphology |                                         |                                               |
+| Fri., Sept. 25 | Regular languages and natural language morphology |                                         | [View](regular_languages/assignment3.html)    |
 | Mon., Sept. 28 | Context-free languages                            |                                         |                                               |
 | Wed., Sept. 30 | Context-free languages                            |                                         |                                               |
 | Fri., Oct. 2   | Pushdown automata                                 |                                         |                                               |
-| Mon., Oct. 5   | Pushdown automata                                 |                                         | View                                          |
-| Wed., Oct. 7   | Context-sensitive languages                       |                                         |                                               |
+| Mon., Oct. 5   | Pushdown automata                                 |                                         |                                               |
+| Wed., Oct. 7   | Context-sensitive languages                       |                                         | [View](regular_languages/assignment4.html)    |
 | Mon., Oct. 12  | Context-sensitive languages                       |                                         |                                               |
 | Wed., Oct. 14  | Linear bounded automata                           |                                         |                                               |
 | Fri., Oct. 16  | Linear bounded automata                           |                                         |                                               |

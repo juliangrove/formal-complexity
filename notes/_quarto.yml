@@ -32,6 +32,9 @@ website:
         - regular_languages/dfas.qmd
         - regular_languages/nfas.qmd
         - regular_languages/equivalence.qmd
+        - regular_languages/assignment3.qmd
+        - regular_languages/pumping_lemma.qmd
+        - regular_languages/assignment4.qmd
     - section: "Context-free languages"
     - section: "Context-sensitivity"
     - section: "Mild context-sensitivity"
